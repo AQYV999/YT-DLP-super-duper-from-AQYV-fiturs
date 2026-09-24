@@ -1,0 +1,3 @@
+# Paste link video/live baru di bawah ini, satu link per baris
+# Baris yang diawali # dianggap komentar (diabaikan)
+https://www.youtube.com/watch?v=GjPSDlJQZsE
