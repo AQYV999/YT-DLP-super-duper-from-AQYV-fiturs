@@ -34,21 +34,3 @@ Catatan
 Taruh file cookies.txt di folder yang sama kalau mau download video yang dibatasi umur.
 Semua script sudah pakai archive biar gak double download.
 
-
-
-Scroll ke bawah, tulis commit message bebas (contoh: Add README), terus klik Commit new file.
-
-Langkah 3: Isi About section
-Masih di halaman repo:
-
-Di sebelah kanan ada tulisan About → klik icon pensil (Edit)
-Isi:
-Description: Kumpulan script yt-dlp siap pakai: download terbaru, terpopuler, dari list URL, mode transcribe
-Topics: ketik satu-satu lalu enter → yt-dlp youtube downloader batch python audio
-
-Klik Save changes
-
-Langkah 4: Selesai dulu
-Setelah README + About selesai, repo lo udah kelihatan jauh lebih profesional.
-Nanti bilang aja “udah” atau “lanjut”, gue kasih langkah berikutnya (cara ganti path biar gak hardcoded, atau cara sebar biar mulai ada yang liat).
-Tinggal ikut, gak usah mikir. Mau mulai dari Langkah 1 sekarang?
