@@ -1,56 +1,53 @@
 @echo off
 REM ============================================
-REM  Download 20 Video TERBARU dari Channel (MP3 192)
+REM  Download 20 Video TERBARU dari Channel (MP3)
 REM ============================================
 
-set "FOLDER=O:\Download\Youtube Dowloader"
-set "CHANNEL_URL=https://www.youtube.com/@dc.production5896/videos"
+set "FOLDER=%~dp0Download"
+set "CHANNEL_URL=https://www.youtube.com/@NAMA_CHANNEL_MU/videos"
 set "JUMLAH_LAGU=20"
 set "ARCHIVE_FILE=archive_audio_192.txt"
 set "TEMP_URLS=temp_urls.txt"
 set "COOKIES_FILE=cookies.txt"
 
+if not exist "%FOLDER%" mkdir "%FOLDER%"
 cd /d "%FOLDER%"
 
 echo ============================================
-echo  MODE: 20 Video TERBARU - MP3 192 kbps
+echo  MODE: 20 Video TERBARU - MP3
 echo  Channel: %CHANNEL_URL%
 echo ============================================
 echo.
 
-REM --- Cek koneksi internet ---
 ping -n 1 www.youtube.com >nul 2>&1
 if errorlevel 1 (
-    echo ERROR: Tidak bisa akses YouTube. Cek koneksi / DNS.
+    echo ERROR: Tidak bisa akses YouTube. Cek koneksi.
     pause
     exit /b
 )
 
-REM --- Cek file cookies ---
 if not exist "%COOKIES_FILE%" (
-    echo PERHATIAN: File "%COOKIES_FILE%" tidak ditemukan.
-    echo Video age-restricted mungkin gagal diunduh.
-    echo.
-    timeout /t 5 >nul
+    echo PERHATIAN: cookies.txt tidak ditemukan.
+    echo Video age-restricted mungkin gagal.
+    timeout /t 3 >nul
 )
 
-python get_videos.py latest "%CHANNEL_URL%" %JUMLAH_LAGU% > "%TEMP_URLS%"
+python "%~dp0get_videos.py" latest "%CHANNEL_URL%" %JUMLAH_LAGU% > "%TEMP_URLS%"
 
-REM --- Cek file kosong ---
 for %%A in ("%TEMP_URLS%") do set "SIZE=%%~zA"
 if "%SIZE%"=="0" (
     echo Tidak ada URL yang didapat.
-    del "%TEMP_URLS%"
+    del "%TEMP_URLS%" 2>nul
     pause
     exit /b
 )
 
 echo.
-echo Mendownload audio (MP3 192 kbps)...
+echo Mendownload audio (MP3)...
 yt-dlp ^
   -N 4 ^
   -f "ba/b" ^
-  -x --audio-format mp3 --audio-quality 320K ^
+  -x --audio-format mp3 --audio-quality 192K ^
   --download-archive "%ARCHIVE_FILE%" ^
   --extractor-args "youtube:player_client=android,web" ^
   --cookies "%COOKIES_FILE%" ^
@@ -58,8 +55,8 @@ yt-dlp ^
   -a "%TEMP_URLS%" ^
   -o "%%(title)s.%%(ext)s"
 
-del "%TEMP_URLS%"
+del "%TEMP_URLS%" 2>nul
 
 echo.
-echo ===== SELESAI (TERBARU - MP3 192) =====
+echo ===== SELESAI (TERBARU) =====
 pause
